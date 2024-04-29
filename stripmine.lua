@@ -19,6 +19,10 @@ function trunk(branches, length)
         turtle.dig();
         turtle.digUp();
         turtle.forward();
+
+        turtle.dig();
+        turtle.digUp();
+        turtle.forward();
         
         turtle.turnLeft();
         branch(length);
