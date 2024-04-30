@@ -1,12 +1,15 @@
 if arg[1] == nil then 
-    print("please input a length paramter")
+    print("input branches")
     return
 end 
 
 if arg[2] == nil then 
-    print("please input the number of branches")
+    print("input length of each branch")
     return
 end 
+
+local x = 0;
+local y = 0;
 
 function trunk(branches, length) 
     for i=1, branches do
@@ -27,6 +30,12 @@ function trunk(branches, length)
         turtle.turnLeft();
         branch(length);
     end
+    for i=1, branches do
+        turtle.turnLeft();
+        turtle.forward();
+        turtle.forward();
+        turtle.forward();
+    end
 end
 
 function branch(length)  
@@ -35,10 +44,18 @@ function branch(length)
         turtle.digUp();
         turtle.forward();
     end
+    turtle.turnLeft();
+    turtle.turnLeft();
+
 
     for i=1, length do
-        turtle.back();
+        while turtle.detect() do
+            turtle.dig();
+        end
+        turtle.forward();
     end
+    turtle.turnLeft();
+    turtle.turnLeft();
 end
 
 trunk(arg[1], arg[2])
