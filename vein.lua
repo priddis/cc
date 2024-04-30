@@ -34,7 +34,24 @@ function search()
         t.back();
     end
     t.turnLeft();
-    t.back();
+
+    --up
+    local is_block, block_data = t.inspectUp();
+    if is_wanted(block_data.name, wanted) then
+        t.digUp();
+        t.up();
+        search();
+        t.down();
+    end
+
+    --down
+    local is_block, block_data = t.inspectDown();
+    if is_wanted(block_data.name, wanted) then
+        t.digDown();
+        t.down();
+        search();
+        t.up();
+    end
 end
 
 
