@@ -57,7 +57,19 @@ end
 
 function branch(length)  
     for i=1, length do
-        turtle.dig()
+        local is_block, block_data = t.inspect();
+        if is_wanted(block_data, wanted) then
+            search()
+        end
+        local is_block, block_data = t.inspectUp();
+        if is_wanted(block_data, wanted) then
+            search()
+        end
+        local is_block, block_data = t.inspectDown();
+        if is_wanted(block_data, wanted) then
+            search()
+        end
+        turtle.dig();
         turtle.digUp();
         turtle.forward();
     end
