@@ -1,3 +1,11 @@
+t = turtle
+local wanted = {
+    "minecraft:diamond_ores",
+    "minecraft:iron_ores",
+    "minecraft:redstone_ores",
+    "minecraft:coal_ores",
+    "minecraft:gold_ores"
+}
 if arg[1] == nil then 
     print("input branches")
     return
@@ -68,3 +76,66 @@ function branch(length)
 end
 
 trunk(arg[1], arg[2])
+
+
+
+function search() 
+    local is_block, block_data = t.inspect();
+    -- forward
+    if is_wanted(block_data, wanted) then
+        t.dig();
+        t.forward();
+        search();
+        t.back();
+    end
+
+    -- left
+    t.turnLeft();
+    local is_block, block_data = t.inspect();
+    if is_wanted(block_data, wanted) then
+        t.dig();
+        t.forward();
+        search();
+        t.back();
+    end
+
+    --right
+    t.turnRight();
+    t.turnRight();
+    local is_block, block_data = t.inspect();
+    if is_wanted(block_data, wanted) then
+        t.dig();
+        t.forward();
+        search();
+        t.back();
+    end
+    t.turnLeft();
+
+    --up
+    local is_block, block_data = t.inspectUp();
+    if is_wanted(block_data, wanted) then
+        t.digUp();
+        t.up();
+        search();
+        t.down();
+    end
+
+    --down
+    local is_block, block_data = t.inspectDown();
+    if is_wanted(block_data, wanted) then
+        t.digDown();
+        t.down();
+        search();
+        t.up();
+    end
+end
+
+
+function is_wanted(block_data, wanted) 
+    for i, tag in ipairs(wanted) do
+        if block_data[tag] then
+            return true
+        end
+    end
+    return false
+end
