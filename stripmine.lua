@@ -30,10 +30,19 @@ function trunk(branches, length)
         turtle.turnLeft();
         branch(length);
     end
+    turtle.turnLeft();
     for i=1, branches do
-        turtle.turnLeft();
+        while turtle.detect() do
+            turtle.dig();
+        end
         turtle.forward();
+        while turtle.detect() do
+            turtle.dig();
+        end
         turtle.forward();
+        while turtle.detect() do
+            turtle.dig();
+        end
         turtle.forward();
     end
 end
