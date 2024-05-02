@@ -8,10 +8,9 @@ local wanted = {
 }
 
 function is_wanted(block_data, wanted) 
-    print(block_data.tags)
     for i, tag in ipairs(wanted) do
         print(tag)
-        if block_data.tags[tag] then
+        if block_data and block_data.tags and block_data.tags[tag] then
             return true
         end
     end
@@ -137,9 +136,5 @@ function search()
         t.up();
     end
 end
-
-
-
-
 
 trunk(arg[1], arg[2])
