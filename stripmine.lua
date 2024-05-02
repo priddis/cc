@@ -6,6 +6,18 @@ local wanted = {
     "minecraft:coal_ores",
     "minecraft:gold_ores"
 }
+
+function is_wanted(block_data, wanted) 
+    print(block_data.tags)
+    for i, tag in ipairs(wanted) do
+        print(tag)
+        if block_data.tags[tag] then
+            return true
+        end
+    end
+    return false
+end
+
 if arg[1] == nil then 
     print("input branches")
     return
@@ -51,6 +63,7 @@ function trunk(branches, length)
         end
         turtle.forward();
     end
+    turtle.turnRight();
 end
 
 function branch(length)  
@@ -126,19 +139,7 @@ function search()
 end
 
 
-function is_wanted(block_data, wanted) 
-    for i, tag in ipairs(wanted) do
-        print(block_data.tags)
-        print(tag)
-        if block_data.tags[tag] then
-            return true
-        end
-    end
-    return false
-end
 
 
 
 trunk(arg[1], arg[2])
-
-
