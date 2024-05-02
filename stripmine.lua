@@ -16,8 +16,6 @@ if arg[2] == nil then
     return
 end 
 
-local x = 0;
-local y = 0;
 
 function trunk(branches, length) 
     for i=1, branches do
@@ -57,18 +55,7 @@ end
 
 function branch(length)  
     for i=1, length do
-        local is_block, block_data = t.inspect();
-        if is_wanted(block_data, wanted) then
-            search()
-        end
-        local is_block, block_data = t.inspectUp();
-        if is_wanted(block_data, wanted) then
-            search()
-        end
-        local is_block, block_data = t.inspectDown();
-        if is_wanted(block_data, wanted) then
-            search()
-        end
+        search();
         turtle.dig();
         turtle.digUp();
         turtle.forward();
@@ -86,10 +73,6 @@ function branch(length)
     turtle.turnLeft();
     turtle.turnLeft();
 end
-
-trunk(arg[1], arg[2])
-
-
 
 function search() 
     local is_block, block_data = t.inspect();
@@ -145,9 +128,17 @@ end
 
 function is_wanted(block_data, wanted) 
     for i, tag in ipairs(wanted) do
-        if block_data[tag] then
+        print(block_data.tags)
+        print(tag)
+        if block_data.tags[tag] then
             return true
         end
     end
     return false
 end
+
+
+
+trunk(arg[1], arg[2])
+
+
